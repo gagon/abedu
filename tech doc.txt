@@ -1,0 +1,157 @@
+﻿School Platform – Frontend Documentation (v1.2)
+Stack: ReactJS + Tailwind CSS + shadcn/ui
+Scope: Frontend documentation for School module only. Modules Quizzes and Games remain blank placeholders (no details needed yet). Authentication with email/password is included. Theme: follow Udacity style.
+________________
+
+
+1. Overall Layout
+1.1 Navigation (Top Navbar)
+* Fixed top navigation bar, Udacity‑style.
+* Tabs: School | Quizzes | Games.
+* Active tab highlighted.
+* User menu (top right): Login/Logout/Profile.
+1.2 Page Structure
+* Landing (/) → Redirects to /school
+* School module has multiple nested routes.
+* Responsive design: desktop = 3 columns, tablet = 2 columns (collapsible), mobile = stacked view.
+________________
+
+
+2. Pages
+2.1 Auth Pages
+* /login
+   * Email + password form.
+   * Tailwind form with shadcn/ui <Input>, <Label>, <Button>.
+   * Error messages inline.
+* /register
+   * Email, password, confirm password, name.
+   * Same UI components.
+* /account
+   * Profile info: name, email.
+   * Change password form.
+2.2 School Pages
+/school
+* Displays Grades 1–5.
+* Each grade displayed as a GradeSection with a title (e.g., Grade 1).
+* Under each grade title, show subject cards aligned left to right in this order: Math → Literacy → Science → English Language.
+* Subject cards include:
+   * Title (Math, Literacy, Science, English Language)
+   * Small description (placeholder text for now)
+   * Progress bar (shadcn/ui <Progress>, placeholder 0%).
+   * Cover image or colored background (optional).
+* Grade title is not clickable; only subject cards are clickable.
+/school/[grade]/[subject]
+* Subject overview page.
+* Uses 3‑column layout:
+   * Left (Chapter Navigation):
+      * Sidebar with collapsible list of chapters.
+      * Highlight active chapter.
+   * Middle (Content):
+      * Subject title at top.
+      * Placeholder content (for now: “This is subject content”).
+      * Video player embed (YouTube).
+      * Text body (Markdown rendered with typography plugin for Tailwind).
+      * End of page reserved for mini‑quiz (not implemented yet, show placeholder).
+   * Right (Help Panel):
+      * Currently blank (reserved for future AI agent).
+/school/[grade]/[subject]/[chapter]
+* Same 3‑column layout as above.
+* Chapter navigation (left) highlights current chapter.
+* Middle shows specific chapter content.
+* Right panel blank.
+________________
+
+
+3. Components
+3.1 Navigation
+* TopNav
+   * Tabs: School | Quizzes | Games.
+   * Logo (left).
+   * User avatar/login button (right).
+3.2 Grade & Subject Cards
+* GradeSection
+   * Displays title (e.g., Grade 1).
+   * Renders SubjectCards left to right in order: Math, Literacy, Science, English Language.
+   * Grade title is static text only (not clickable).
+* SubjectCard
+   * Title, description.
+   * Progress bar.
+   * Click → navigates directly to subject page.
+3.3 Layout
+* SubjectLayout
+   * Grid with 3 columns.
+   * ChapterNav (left)
+   * ContentArea (middle)
+   * HelpPanel (right)
+3.4 Content
+* VideoPlayer
+   * YouTube embed (react-player recommended).
+   * Full width, responsive.
+* LessonBody
+   * Markdown/MDX rendered with Tailwind typography.
+* PlaceholderQuiz
+   * Simple card with text “Mini‑quiz coming soon”.
+3.5 Auth Components
+* AuthForm
+   * Handles login/register forms.
+   * Inputs with validation.
+________________
+
+
+4. Routing Structure
+/
+/login
+/register
+/account
+/school
+/school/[grade]/[subject]
+/school/[grade]/[subject]/[chapter]
+/quizzes (blank)
+/games (blank)
+
+
+
+
+________________
+
+
+5. Styling & Theming
+* Copy Udacity style: light theme, clean typography, lots of whitespace.
+* Colors: blue primary, white background, gray accents.
+* Rounded corners (rounded-2xl), shadows for cards.
+* Font: sans‑serif (default Tailwind font stack acceptable).
+________________
+
+
+6. Responsive Design
+* Desktop: 3‑column layout.
+* Tablet: left collapses to drawer, right collapses below content.
+* Mobile: stacked view → content first, chapters collapsible accordion, help panel at bottom.
+________________
+
+
+7. Example UI Flow
+1. Student logs in → redirected to /school.
+2. Sees grades 1–5, each with a GradeSection title (Grade 1, Grade 2, etc.).
+3. Under each grade title, subject cards are displayed left to right in the order: Math, Literacy, Science, English Language.
+4. Clicks on a subject card (e.g., Grade 2 → Math) → lands on subject page with chapter list on left, placeholder video/text in middle, blank right panel.
+5. Clicks a chapter → updates middle content.
+________________
+
+
+8. Placeholder Content
+* For now, chapters, text, and quizzes are placeholders.
+* Use mock JSON data for grades, subjects, chapters.
+________________
+
+
+9. Implementation Plan (Frontend)
+1. Scaffold React + Tailwind + shadcn/ui project.
+2. Add routing structure (react-router-dom or Next.js if chosen later).
+3. Implement TopNav.
+4. Create /login, /register, /account pages with forms.
+5. Build /school page with grade sections and subject cards left to right.
+6. Create SubjectLayout with 3‑column design.
+7. Add YouTube video embedding and placeholder text.
+8. Add responsive design (desktop/tablet/mobile).
+9. Deploy static version (no backend yet).
